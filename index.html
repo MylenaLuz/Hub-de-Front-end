@@ -1,0 +1,3947 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mentoria Git • Hub de Frontend</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    :root{
+      --bg:#07070b;
+      --bg2:#0f0f17;
+      --bg3:#151521;
+
+      --purple:#7c3aed;
+      --purple-light:#a855f7;
+
+      --text:#f4f4ff;
+      --muted:#9494b8;
+
+      --border:rgba(124,58,237,.2);
+
+      --gradient:
+      linear-gradient(
+      135deg,
+      #7c3aed,
+      #a855f7
+      );
+
+      --display:'Rajdhani', sans-serif;
+      --body:'Outfit', sans-serif;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      background:var(--bg);
+      color:var(--text);
+      font-family:var(--body);
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:'';
+      position:fixed;
+      inset:0;
+
+      background-image:
+      linear-gradient(rgba(124,58,237,.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(124,58,237,.04) 1px, transparent 1px);
+
+      background-size:60px 60px;
+
+      pointer-events:none;
+      z-index:-1;
+    }
+
+    /* NAVBAR */
+
+    nav{
+      position:sticky;
+      top:0;
+
+      height:78px;
+
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+
+      padding:0 5%;
+
+      backdrop-filter:blur(18px);
+
+      background:rgba(7,7,11,.75);
+
+      border-bottom:1px solid var(--border);
+
+      z-index:999;
+    }
+
+    .logo{
+      text-decoration:none;
+      color:white;
+      font-family:var(--display);
+    }
+
+    .logo h1{
+      font-size:1.6rem;
+      line-height:1;
+    }
+
+    .logo span{
+      color:var(--purple-light);
+    }
+
+    .logo small{
+      color:var(--muted);
+      font-size:.75rem;
+      letter-spacing:1px;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:2rem;
+      list-style:none;
+    }
+
+    .nav-links a{
+      text-decoration:none;
+      color:var(--muted);
+      font-weight:500;
+      transition:.3s;
+      position:relative;
+    }
+
+    .nav-links a:hover{
+      color:white;
+    }
+
+    .nav-links a::after{
+      content:'';
+      position:absolute;
+      left:0;
+      bottom:-5px;
+
+      width:0%;
+      height:2px;
+
+      background:var(--purple-light);
+
+      transition:.3s;
+    }
+
+    .nav-links a:hover::after{
+      width:100%;
+    }
+
+    .btn{
+      text-decoration:none;
+      color:white;
+      background:var(--gradient);
+
+      padding:.9rem 1.5rem;
+
+      border-radius:10px;
+
+      font-weight:600;
+
+      transition:.3s;
+
+      display:inline-flex;
+      align-items:center;
+      gap:.5rem;
+
+      box-shadow:
+      0 0 30px rgba(124,58,237,.35);
+    }
+
+    .btn:hover{
+      transform:translateY(-3px);
+    }
+
+    /* HERO */
+
+    .hero{
+      min-height:100vh;
+
+      display:grid;
+      grid-template-columns:1fr 1fr;
+
+      align-items:center;
+
+      padding:0 5%;
+
+      gap:4rem;
+    }
+
+    .hero-content small{
+      text-transform:uppercase;
+      letter-spacing:2px;
+      color:var(--purple-light);
+      font-weight:600;
+    }
+
+    .hero-content h2{
+      font-size:clamp(3rem, 6vw, 5.5rem);
+      line-height:1;
+      margin:1rem 0;
+
+      font-family:var(--display);
+    }
+
+    .hero-content h2 span{
+      color:var(--purple-light);
+    }
+
+    .hero-content p{
+      color:var(--muted);
+      font-size:1.1rem;
+      max-width:600px;
+      line-height:1.8;
+      margin-bottom:2rem;
+    }
+
+    .hero-buttons{
+      display:flex;
+      gap:1rem;
+      flex-wrap:wrap;
+    }
+
+    .btn-outline{
+      background:transparent;
+      border:1px solid var(--purple);
+    }
+
+    /* HERO CARD */
+
+    .hero-card{
+      background:rgba(255,255,255,.03);
+
+      border:1px solid var(--border);
+
+      border-radius:28px;
+
+      padding:2rem;
+
+      backdrop-filter:blur(14px);
+
+      position:relative;
+
+      overflow:hidden;
+    }
+
+    .hero-card::before{
+      content:'';
+      position:absolute;
+      width:250px;
+      height:250px;
+
+      background:rgba(124,58,237,.18);
+
+      border-radius:50%;
+
+      top:-120px;
+      right:-100px;
+
+      filter:blur(20px);
+    }
+
+    .terminal{
+      background:#09090f;
+
+      border-radius:18px;
+
+      overflow:hidden;
+
+      border:1px solid rgba(255,255,255,.06);
+    }
+
+    .terminal-top{
+      display:flex;
+      gap:.5rem;
+
+      padding:1rem;
+
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+
+    .ball{
+      width:12px;
+      height:12px;
+      border-radius:50%;
+    }
+
+    .red{background:#ff5f57;}
+    .yellow{background:#febb2e;}
+    .green{background:#28c840;}
+
+    .terminal-code{
+      padding:2rem;
+
+      font-family:monospace;
+
+      color:#d6d6ff;
+
+      line-height:2;
+      font-size:.95rem;
+    }
+
+    .tag{
+      color:#c084fc;
+    }
+
+    .attr{
+      color:#60a5fa;
+    }
+
+    /* SECTION */
+
+    section{
+      padding:100px 5%;
+    }
+
+    .section-title{
+      margin-bottom:4rem;
+    }
+
+    .section-title small{
+      color:var(--purple-light);
+      text-transform:uppercase;
+      letter-spacing:2px;
+      font-weight:600;
+    }
+
+    .section-title h3{
+      font-size:3rem;
+      font-family:var(--display);
+      margin-top:.5rem;
+    }
+
+    /* ROADMAP */
+
+    .roadmap{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:2rem;
+    }
+
+    .module{
+      background:var(--bg2);
+
+      border:1px solid var(--border);
+
+      border-radius:24px;
+
+      padding:2rem;
+
+      transition:.4s;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .module:hover{
+      transform:translateY(-8px);
+      border-color:var(--purple);
+    }
+
+    .module-number{
+      width:52px;
+      height:52px;
+
+      border-radius:14px;
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+
+      background:rgba(124,58,237,.18);
+
+      color:var(--purple-light);
+
+      font-weight:700;
+
+      margin-bottom:1.5rem;
+    }
+
+    .module h4{
+      font-size:1.4rem;
+      margin-bottom:1rem;
+    }
+
+    .module ul{
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      gap:.8rem;
+
+      margin-bottom:2rem;
+    }
+
+    .module ul li{
+      color:var(--muted);
+    }
+
+    .challenge{
+      background:rgba(124,58,237,.08);
+
+      border:1px solid rgba(124,58,237,.2);
+
+      padding:1rem;
+
+      border-radius:14px;
+    }
+
+    .challenge span{
+      color:var(--purple-light);
+      font-weight:700;
+      display:block;
+      margin-bottom:.5rem;
+    }
+
+    /* PROJETO */
+
+    .project{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:4rem;
+      align-items:center;
+    }
+
+    .project img{
+      width:100%;
+      border-radius:24px;
+      border:1px solid var(--border);
+      box-shadow:0 0 40px rgba(124,58,237,.15);
+    }
+
+    .project-content h3{
+      font-size:3rem;
+      font-family:var(--display);
+      margin-bottom:1rem;
+    }
+
+    .project-content p{
+      color:var(--muted);
+      line-height:1.8;
+      margin-bottom:2rem;
+    }
+
+    .stack{
+      display:flex;
+      gap:1rem;
+      flex-wrap:wrap;
+    }
+
+    .stack span{
+      background:rgba(255,255,255,.05);
+
+      border:1px solid var(--border);
+
+      padding:.8rem 1rem;
+
+      border-radius:12px;
+
+      font-size:.9rem;
+    }
+
+    /* PROFESSORA */
+
+    .mentor{
+      text-align:center;
+    }
+
+    .mentor-card{
+      max-width:800px;
+      margin:auto;
+
+      background:var(--bg2);
+
+      border:1px solid var(--border);
+
+      padding:3rem;
+
+      border-radius:28px;
+    }
+
+    .mentor-card h3{
+      font-size:2.5rem;
+      margin-bottom:1rem;
+      font-family:var(--display);
+    }
+
+    .mentor-card p{
+      color:var(--muted);
+      line-height:1.8;
+      margin-bottom:2rem;
+    }
+
+    .mentor-links{
+      display:flex;
+      justify-content:center;
+      gap:1rem;
+      flex-wrap:wrap;
+      margin-bottom:2rem;
+    }
+
+    .mentor-links a{
+      display:inline-flex;
+      align-items:center;
+      gap:.5rem;
+      padding:.85rem 1.1rem;
+      border-radius:12px;
+      background:rgba(255,255,255,.05);
+      border:1px solid var(--border);
+      color:var(--text);
+      text-decoration:none;
+      font-size:.95rem;
+      transition:.25s;
+    }
+
+    .mentor-links a:hover{
+      transform:translateY(-2px);
+      border-color:rgba(168,85,247,.35);
+      color:#fff;
+    }
+
+    .mentor-badges{
+      display:flex;
+      justify-content:center;
+      gap:1rem;
+      flex-wrap:wrap;
+    }
+
+    .mentor-badges span{
+      padding:.8rem 1rem;
+
+      border-radius:12px;
+
+      background:rgba(124,58,237,.08);
+
+      border:1px solid rgba(124,58,237,.2);
+
+      font-size:.9rem;
+    }
+
+    /* FOOTER */
+
+    footer{
+      padding:50px 5%;
+      border-top:1px solid var(--border);
+      text-align:center;
+      color:var(--muted);
+    }
+
+    /* RESPONSIVO */
+
+    @media(max-width:980px){
+
+      .hero{
+        grid-template-columns:1fr;
+        padding-top:100px;
+      }
+
+      .project{
+        grid-template-columns:1fr;
+      }
+
+      .nav-links{
+        display:none;
+      }
+
+    }
+
+    /* ========================= */
+/* TRILHAS */
+/* ========================= */
+
+.tracks-section{
+  position:relative;
+  padding:8rem 5%;
+  overflow:hidden;
+}
+
+.section-header{
+  max-width:720px;
+  margin:0 auto 4rem;
+  text-align:center;
+}
+
+.section-tag{
+  display:inline-flex;
+  align-items:center;
+  gap:.5rem;
+  padding:.45rem 1rem;
+  border:1px solid rgba(168,85,247,.25);
+  border-radius:999px;
+  background:rgba(124,58,237,.08);
+  color:#c084fc;
+  font-size:.82rem;
+  font-weight:600;
+  letter-spacing:.03em;
+  margin-bottom:1.25rem;
+}
+
+.section-title{
+  font-size:clamp(2.4rem,6vw,4.5rem);
+  line-height:1;
+  font-family:var(--font-display);
+  color:var(--text);
+  margin-bottom:1rem;
+}
+
+.section-title span{
+  background:linear-gradient(135deg,#a855f7,#d8b4fe);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.section-desc{
+  color:var(--text-muted);
+  line-height:1.8;
+  font-size:1.05rem;
+}
+
+/* ========================= */
+/* HERO CARD */
+/* ========================= */
+
+.tracks-hero{
+  position:relative;
+  overflow:hidden;
+  margin-bottom:2rem;
+
+  background:
+  radial-gradient(circle at top left,
+  rgba(168,85,247,.18),
+  transparent 45%),
+
+  linear-gradient(
+  145deg,
+  rgba(18,18,28,.95),
+  rgba(12,12,18,.96));
+
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:32px;
+
+  padding:3rem;
+}
+
+.tracks-hero-content{
+  position:relative;
+  z-index:2;
+  max-width:680px;
+}
+
+.tracks-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:.5rem;
+
+  padding:.55rem 1rem;
+  border-radius:999px;
+
+  background:rgba(124,58,237,.12);
+  border:1px solid rgba(168,85,247,.18);
+
+  color:#d8b4fe;
+  font-size:.85rem;
+  font-weight:600;
+
+  margin-bottom:1.5rem;
+}
+
+.tracks-hero h3{
+  font-size:clamp(2rem,4vw,3.5rem);
+  line-height:1.05;
+  color:var(--text);
+  margin-bottom:1.2rem;
+}
+
+.tracks-hero h3 span{
+  display:block;
+  background:linear-gradient(135deg,#a855f7,#d8b4fe);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.tracks-hero p{
+  max-width:560px;
+  color:var(--text-muted);
+  line-height:1.9;
+  font-size:1rem;
+}
+
+.tracks-stats{
+  display:flex;
+  gap:1rem;
+  flex-wrap:wrap;
+  margin-top:2rem;
+}
+
+.stat{
+  min-width:120px;
+
+  padding:1rem 1.2rem;
+
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:20px;
+
+  backdrop-filter:blur(12px);
+}
+
+.stat strong{
+  display:block;
+  color:#fff;
+  font-size:1.2rem;
+  margin-bottom:.3rem;
+}
+
+.stat span{
+  color:var(--text-muted);
+  font-size:.85rem;
+}
+
+.tracks-hero-glow{
+  position:absolute;
+  width:400px;
+  height:400px;
+  right:-140px;
+  top:-140px;
+  border-radius:50%;
+  background:rgba(124,58,237,.18);
+  filter:blur(90px);
+}
+
+/* ========================= */
+/* PROGRESS */
+/* ========================= */
+
+.progress-card{
+  padding:1.2rem 1.4rem;
+  margin-bottom:1.5rem;
+
+  background:rgba(255,255,255,.03);
+
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:24px;
+
+  backdrop-filter:blur(20px);
+}
+
+.progress-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:.9rem;
+}
+
+.progress-title{
+  display:flex;
+  align-items:center;
+  gap:.55rem;
+
+  color:#fff;
+  font-weight:600;
+}
+
+.progress-title i{
+  color:#a855f7;
+}
+
+.progress-label{
+  color:var(--text-muted);
+  font-size:.9rem;
+}
+
+.progress-track{
+  width:100%;
+  height:10px;
+
+  border-radius:999px;
+  overflow:hidden;
+
+  background:rgba(255,255,255,.06);
+}
+
+.progress-fill{
+  height:100%;
+  width:0%;
+
+  border-radius:999px;
+
+  background:linear-gradient(
+  90deg,
+  #7c3aed,
+  #c084fc);
+
+  transition:width .4s ease;
+}
+
+/* ========================= */
+/* TABS */
+/* ========================= */
+
+.track-tabs{
+  display:flex;
+  gap:.8rem;
+  flex-wrap:wrap;
+  margin-bottom:2rem;
+}
+
+.track-tab{
+  padding:.75rem 1.2rem;
+
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.06);
+
+  background:rgba(255,255,255,.03);
+
+  color:var(--text-muted);
+
+  cursor:pointer;
+  transition:.25s;
+}
+
+.track-tab:hover{
+  transform:translateY(-2px);
+  border-color:rgba(168,85,247,.35);
+}
+
+.track-tab.active{
+  background:linear-gradient(135deg,#7c3aed,#a855f7);
+  color:#fff;
+  border-color:transparent;
+
+  box-shadow:
+  0 10px 30px rgba(124,58,237,.35);
+}
+
+/* ========================= */
+/* LESSONS */
+/* ========================= */
+
+.lessons-grid{
+  display:flex;
+  flex-direction:column;
+  gap:1rem;
+}
+
+.lesson-card{
+  overflow:hidden;
+
+  background:rgba(255,255,255,.03);
+
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:24px;
+
+  backdrop-filter:blur(20px);
+
+  transition:.25s;
+}
+
+.lesson-card:hover{
+  transform:translateY(-4px);
+  border-color:rgba(168,85,247,.22);
+}
+
+.lesson-header{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+
+  padding:1.2rem 1.4rem;
+  cursor:pointer;
+}
+
+.num{
+  width:44px;
+  height:44px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:50%;
+
+  background:rgba(124,58,237,.1);
+  border:1px solid rgba(168,85,247,.18);
+
+  color:#d8b4fe;
+  font-weight:700;
+
+  flex-shrink:0;
+}
+
+.num.done{
+  background:linear-gradient(135deg,#7c3aed,#a855f7);
+  color:#fff;
+  border:none;
+}
+
+.lesson-meta{
+  flex:1;
+}
+
+.lesson-title{
+  display:flex;
+  align-items:center;
+  gap:.6rem;
+  flex-wrap:wrap;
+
+  color:#fff;
+  font-size:1rem;
+  font-weight:600;
+  margin-bottom:.3rem;
+}
+
+.lesson-sub{
+  color:var(--text-muted);
+  font-size:.9rem;
+}
+
+.tag{
+  padding:.3rem .65rem;
+  border-radius:999px;
+
+  font-size:.72rem;
+  font-weight:700;
+}
+
+.t-html{
+  background:rgba(249,115,22,.12);
+  color:#fdba74;
+}
+
+.t-css{
+  background:rgba(59,130,246,.12);
+  color:#93c5fd;
+}
+
+.t-js{
+  background:rgba(234,179,8,.12);
+  color:#fde047;
+}
+
+.dur{
+  color:var(--text-muted);
+  font-size:.85rem;
+  white-space:nowrap;
+}
+
+.chev{
+  color:#8b8aa8;
+  transition:.25s;
+}
+
+.chev.open{
+  transform:rotate(180deg);
+}
+
+.lesson-body{
+  display:none;
+  padding:0 1.4rem 1.4rem;
+  border-top:1px solid rgba(255,255,255,.05);
+}
+
+.lesson-body.open{
+  display:block;
+}
+
+/* ========================= */
+/* CONTENT */
+/* ========================= */
+
+.prose{
+  color:#b7b6cc;
+  line-height:1.9;
+  margin-bottom:1rem;
+}
+
+.prose strong{
+  color:#fff;
+}
+
+.code-block{
+  margin:1rem 0;
+  padding:1rem 1.2rem;
+
+  background:#0b0b12;
+
+  border:1px solid rgba(255,255,255,.05);
+  border-radius:18px;
+
+  overflow:auto;
+
+  font-family:monospace;
+  font-size:.82rem;
+  line-height:1.8;
+  color:#d6d6e7;
+}
+
+.tip,
+.warn{
+  display:flex;
+  gap:.8rem;
+
+  padding:1rem 1.1rem;
+  margin:1rem 0;
+
+  border-radius:18px;
+  line-height:1.7;
+}
+
+.tip{
+  background:rgba(59,130,246,.08);
+  border:1px solid rgba(59,130,246,.14);
+  color:#bfdbfe;
+}
+
+.warn{
+  background:rgba(251,191,36,.08);
+  border:1px solid rgba(251,191,36,.14);
+  color:#fde68a;
+}
+
+.done-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:.6rem;
+
+  margin-top:1rem;
+  padding:.9rem 1.3rem;
+
+  border:none;
+  border-radius:16px;
+
+  background:rgba(255,255,255,.05);
+
+  color:#fff;
+  cursor:pointer;
+
+  transition:.25s;
+}
+
+.done-btn:hover{
+  transform:translateY(-2px);
+}
+
+.done-btn.done{
+  background:linear-gradient(135deg,#7c3aed,#a855f7);
+}
+
+/* ========================= */
+/* RESPONSIVO */
+/* ========================= */
+
+@media(max-width:768px){
+
+  .tracks-section{
+    padding:6rem 1.2rem;
+  }
+
+  .tracks-hero{
+    padding:2rem;
+  }
+
+  .lesson-header{
+    align-items:flex-start;
+  }
+
+  .dur{
+    display:none;
+  }
+
+}
+
+/* QUIZ MODAL */
+
+.quiz-modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.75);
+
+  display:none;
+  align-items:center;
+  justify-content:center;
+
+  padding:1.5rem;
+  z-index:99999;
+}
+
+.quiz-modal.show{
+  display:flex;
+}
+
+.quiz-box{
+  width:100%;
+  max-width:520px;
+
+  background:linear-gradient(
+  145deg,
+  rgba(18,18,28,.98),
+  rgba(10,10,16,.98));
+
+  border:1px solid rgba(168,85,247,.18);
+
+  border-radius:28px;
+  padding:2rem;
+}
+
+.quiz-box h3{
+  margin:1rem 0;
+  font-size:1.7rem;
+}
+
+.quiz-question{
+  color:#c9c9df;
+  line-height:1.8;
+  margin-bottom:1.5rem;
+}
+
+.quiz-options{
+  display:flex;
+  flex-direction:column;
+  gap:.8rem;
+}
+
+.quiz-option{
+  width:100%;
+  border:none;
+
+  background:rgba(255,255,255,.04);
+
+  border:1px solid rgba(255,255,255,.06);
+
+  color:#fff;
+
+  padding:1rem;
+
+  border-radius:16px;
+
+  text-align:left;
+
+  cursor:pointer;
+
+  transition:.25s;
+}
+
+.quiz-option:hover{
+  transform:translateY(-2px);
+  border-color:rgba(168,85,247,.35);
+}
+
+.quiz-feedback{
+  margin-top:1.2rem;
+  padding:1rem;
+  border-radius:16px;
+  display:none;
+}
+
+.quiz-feedback.show{
+  display:block;
+}
+
+.quiz-feedback.correct{
+  background:rgba(34,197,94,.12);
+  border:1px solid rgba(34,197,94,.22);
+  color:#bbf7d0;
+}
+
+.quiz-feedback.wrong{
+  background:rgba(239,68,68,.12);
+  border:1px solid rgba(239,68,68,.22);
+  color:#fecaca;
+}
+
+.quiz-close{
+  margin-top:1.5rem;
+  width:100%;
+  justify-content:center;
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+
+  <nav>
+
+    <a href="#" class="logo">
+      <h1>Hub de <span>Front-end</span></h1>
+      <small>Por Dev Mylena Alves</small>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#trilha">Trilha</a></li>
+      <li><a href="#projeto">Projeto</a></li>
+      <li><a href="#mentora">Mentora</a></li>
+    </ul>
+
+    <a
+      class="btn"
+      href="https://wa.me/5541988247728"
+      target="_blank"
+    >
+      💬 Ajuda e Dúvidas
+    </a>
+
+  </nav>
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <small>HTML & CSS na prática</small>
+
+      <h2>
+        Aprenda frontend criando um projeto <span>real.</span>
+      </h2>
+
+      <p>
+        Desenvolva a NewTech, uma loja gamer moderna e profissional,
+        enquanto aprende HTML e CSS do zero com uma metodologia
+        prática, visual e focada em portfólio.
+      </p>
+
+      <div class="hero-buttons">
+
+        <a href="#trilha" class="btn">
+          🚀 Começar Trilha
+        </a>
+
+        <a href="#projeto" class="btn btn-outline">
+          👀 Ver Projeto Final
+        </a>
+
+      </div>
+
+    </div>
+
+    <div class="hero-card">
+
+      <div class="terminal">
+
+        <div class="terminal-top">
+          <div class="ball red"></div>
+          <div class="ball yellow"></div>
+          <div class="ball green"></div>
+        </div>
+
+        <div class="terminal-code">
+
+          <p>
+            <span class="tag">&lt;header&gt;</span>
+          </p>
+
+          <p>
+            &nbsp;&nbsp;
+            <span class="tag">&lt;nav&gt;</span>
+          </p>
+
+          <p>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="tag">&lt;a</span>
+            <span class="attr">href</span>=
+            "https://wa.me/5541988247728"
+            <span class="tag">&gt;</span>
+          </p>
+
+          <p>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            Fale no WhatsApp
+          </p>
+
+          <p>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="tag">&lt;/a&gt;</span>
+          </p>
+
+          <p>
+            &nbsp;&nbsp;
+            <span class="tag">&lt;/nav&gt;</span>
+          </p>
+
+          <p>
+            <span class="tag">&lt;/header&gt;</span>
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- PROJETO -->
+
+  <section id="projeto">
+
+    <div class="project">
+
+      <img
+        src="./img/prototipo.png"
+        alt="Projeto NewTech"
+      >
+
+      <div class="project-content">
+
+        <small style="color:var(--purple-light); text-transform:uppercase; letter-spacing:2px;">
+          Projeto Final
+        </small>
+
+        <h3>NewTech</h3>
+
+        <p>
+          Durante a mentoria você desenvolverá uma landing page gamer
+          moderna inspirada em interfaces profissionais reais,
+          aprendendo estruturação, estilização e refinamento visual.
+        </p>
+
+        <div class="stack">
+          <span>HTML5</span>
+          <span>CSS3</span>
+          <span>Responsividade</span>
+          <span>UI/UX</span>
+          <span>Flexbox</span>
+          <span>Landing Page</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- MENTORA -->
+
+  <section id="mentora" class="mentor">
+
+    <div class="mentor-card">
+
+      <small style="color:var(--purple-light); text-transform:uppercase; letter-spacing:2px;">
+        Mentora
+      </small>
+
+      <h3>Mylena Alves</h3>
+
+      <p>
+        Dev e apaixonada por interfaces
+        modernas. Essa mentoria foi criada para ensinar HTML e CSS
+        de maneira prática, profissional e visualmente refinada,
+        simulando projetos reais do mercado.
+      </p>
+
+      <div class="mentor-links">
+        <a
+          href="https://www.instagram.com/mylubunny/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Instagram @mylubunny
+        </a>
+
+        <a
+          href="https://www.linkedin.com/in/mylena-luz-733017176/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          LinkedIn Mylena Luz
+        </a>
+      </div>
+
+      <div class="mentor-badges">
+        <span>Frontend</span>
+        <span>UI/UX Design</span>
+        <span>HTML & CSS</span>
+        <span>Projetos Reais</span>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ========================= -->
+
+<!-- SECTION: TRILHAS -->
+
+<!-- ========================= -->
+
+<section class="tracks-section" id="trilha">
+
+  <div class="section-header">
+
+    <span class="section-tag">Aprenda na prática</span>
+
+    <h2 class="section-title">
+
+      Trilhas de estudo
+
+      <span>imersivas</span>
+
+    </h2>
+
+    <p class="section-desc">
+
+      Aprenda HTML, CSS e JavaScript através de aulas organizadas
+
+      visualmente, com progresso salvo e interface premium.
+
+    </p>
+
+  </div>
+
+  <!-- HERO CARD -->
+
+  <div class="tracks-hero">
+
+    <div class="tracks-hero-content">
+
+      <div class="tracks-badge">
+
+        <i class="ti ti-bolt"></i>
+
+        Front-end Essentials
+
+      </div>
+
+      <h3>
+
+        Domine a base do
+
+        <span>desenvolvimento web moderno</span>
+
+      </h3>
+
+      <p>
+
+        Uma experiência de aprendizado pensada para iniciantes:
+
+        visual sofisticado, explicações claras e prática real.
+
+      </p>
+
+      <div class="tracks-stats">
+
+        <div class="stat">
+
+          <strong>09</strong>
+
+          <span>Aulas</span>
+
+        </div>
+
+        <div class="stat">
+
+          <strong>1h+</strong>
+
+          <span>Conteúdo</span>
+
+        </div>
+
+        <div class="stat">
+
+          <strong>HTML</strong>
+
+          <span>CSS • JS</span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="tracks-hero-glow"></div>
+
+  </div>
+
+  <!-- PROGRESS -->
+
+  <div class="progress-card">
+
+    <div class="progress-top">
+
+      <div class="progress-title">
+
+        <i class="ti ti-school"></i>
+
+        Seu progresso
+
+      </div>
+
+      <span class="progress-label" id="pp">
+
+        0 / 9 concluídas
+
+      </span>
+
+    </div>
+
+    <div class="progress-track">
+
+      <div class="progress-fill" id="pf"></div>
+
+    </div>
+
+  </div>
+
+  <!-- FILTERS -->
+
+  <div class="track-tabs" id="tabs">
+
+    <button class="track-tab active" data-f="all">
+
+      Todas
+
+    </button>
+
+    <button class="track-tab" data-f="html">
+
+      HTML
+
+    </button>
+
+    <button class="track-tab" data-f="css">
+
+      CSS
+
+    </button>
+
+    <button class="track-tab" data-f="js">
+
+      Bônus
+
+    </button>
+
+  </div>
+
+  <!-- LESSONS -->
+
+  <div class="lessons-grid" id="container"></div>
+  
+
+</section>
+
+<div class="quiz-modal" id="quizModal">
+
+  <div class="quiz-box">
+
+    <small>Desafio rápido</small>
+
+    <h3 id="quizTitle"></h3>
+
+    <p class="quiz-question" id="quizQuestion"></p>
+
+    <div class="quiz-options" id="quizOptions"></div>
+
+    <div class="quiz-feedback" id="quizFeedback"></div>
+
+    <button class="btn quiz-close" id="quizClose">
+      Fechar
+    </button>
+
+  </div>
+
+</div>
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    © 2026 Hub de Frontend 
+    Desenvolvido por Mylena Alves
+
+  </footer>
+
+  <script>
+
+const lessons = [
+
+{
+  id:1,
+  category:'css',
+  title:'Aula 01 — Estrutura Base + Variáveis CSS',
+  duration:'6min',
+  tag:'HTML + CSS',
+  quiz:{
+    question:'Qual é a principal vantagem de usar variáveis CSS no :root?',
+    options:[
+      'Deixar o HTML mais rápido',
+      'Centralizar cores e estilos reutilizáveis',
+      'Substituir o JavaScript completamente'
+    ],
+    answer:1,
+    feedback:'Isso mesmo! Variáveis CSS facilitam manutenção e consistência visual.'
+  },
+  content:`
+
+<p class="prose">
+<strong>O que vamos aprender hoje?</strong><br>
+Nessa primeira aula vamos montar a base do projeto Nova Tech.
+</p>
+
+<p class="prose">
+Você vai aprender:
+</p>
+
+<div class="tip">
+<ul>
+  <li>como nasce uma página HTML</li>
+  <li>o que fica dentro do &lt;head&gt;</li>
+  <li>como conectar fontes do Google Fonts</li>
+  <li>o que são variáveis CSS</li>
+  <li>como definir cores globais</li>
+  <li>como resetar espaçamentos automáticos do navegador</li>
+</ul>
+</div>
+
+<p class="prose">
+No final da aula você terá:<br>
+✅ a estrutura inicial do projeto<br>
+✅ tipografia configurada<br>
+✅ paleta de cores pronta<br>
+✅ base profissional para continuar o site
+</p>
+
+<p class="prose">
+<strong>1. Criando a estrutura do HTML</strong><br>
+Toda página começa com uma estrutura base.
+</p>
+
+<div class="code-block">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</div>
+
+<p class="prose">
+<strong>O que significa cada parte?</strong>
+</p>
+
+<div class="code-block">
+&lt;!DOCTYPE html&gt;
+</div>
+
+<p class="prose">
+Informa ao navegador que estamos usando HTML5. Sem isso, alguns navegadores podem interpretar o site de forma errada.
+</p>
+
+<div class="code-block">
+&lt;html lang="pt-BR"&gt;
+</div>
+
+<p class="prose">
+É a tag principal do documento. O <strong>lang="pt-BR"</strong> diz que o idioma da página é português do Brasil.
+</p>
+
+<div class="tip">
+<ul>
+  <li>acessibilidade</li>
+  <li>leitores de tela</li>
+  <li>Google</li>
+  <li>SEO</li>
+</ul>
+</div>
+
+<div class="code-block">
+&lt;head&gt;
+</div>
+
+<p class="prose">
+Aqui ficam configurações da página, como título, fontes, ícone, responsividade e conexão com CSS. O usuário normalmente não vê o conteúdo do &lt;head&gt; diretamente.
+</p>
+
+<div class="code-block">
+&lt;body&gt;
+</div>
+
+<p class="prose">
+Tudo que aparece visualmente no site fica dentro do body: textos, imagens, botões, menus, cards e banners.
+</p>
+
+<p class="prose">
+<strong>2. Configurando responsividade</strong><br>
+Agora vamos adicionar algumas configurações importantes no &lt;head&gt;.
+</p>
+
+<div class="code-block">
+&lt;meta charset="UTF-8" /&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+</div>
+
+<p class="prose">
+<strong>UTF-8</strong><br>
+Permite usar acentos, caracteres especiais e emojis.
+</p>
+
+<div class="warn">
+Sem isso, Tecnologia pode aparecer como TecnologiaÃ.
+</div>
+
+<p class="prose">
+<strong>Viewport</strong><br>
+Essa linha faz o site funcionar corretamente no celular. Sem ela, textos podem ficar minúsculos, o layout pode quebrar e um zoom estranho pode acontecer.
+</p>
+
+<p class="prose">
+<strong>3. Adicionando fontes profissionais</strong><br>
+Agora vamos importar fontes do Google Fonts.
+</p>
+
+<div class="code-block">
+&lt;link rel="preconnect" href="https://fonts.googleapis.com" /&gt;
+&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /&gt;
+&lt;link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&amp;family=Outfit:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" /&gt;
+</div>
+
+<p class="prose">
+<strong>Mas afinal… o que é Rajdhani?</strong><br>
+Rajdhani é o nome da fonte. Assim como Arial, Times New Roman e Poppins são fontes.
+</p>
+
+<p class="prose">
+<strong>Por que usamos duas fontes?</strong><br>
+No projeto Nova Tech usamos Rajdhani e Outfit.
+</p>
+
+<p class="prose">
+<strong>Rajdhani</strong><br>
+Fonte mais tecnológica e impactante. Usamos em títulos, logo e chamadas principais. Ela passa sensação futurista/gamer.
+</p>
+
+<p class="prose">
+<strong>Outfit</strong><br>
+Fonte mais limpa e confortável para leitura. Usamos em parágrafos, menus, botões e descrições. Ela melhora a experiência do usuário.
+</p>
+
+<p class="prose">
+<strong>4. Criando variáveis CSS</strong><br>
+Agora vamos começar o CSS.
+</p>
+
+<div class="code-block">
+:root {
+  --bg: #0a0a0f;
+  --purple: #7c3aed;
+  --text: #f0eeff;
+  --font-display: 'Rajdhani', sans-serif;
+  --font-body: 'Outfit', sans-serif;
+}
+</div>
+
+<p class="prose">
+<strong>O que é :root?</strong><br>
+O :root funciona como um lugar global. Tudo que criarmos ali pode ser reutilizado no site inteiro.
+</p>
+
+<p class="prose">
+<strong>O que são variáveis CSS?</strong><br>
+As variáveis guardam valores reutilizáveis.
+</p>
+
+<div class="code-block">
+--purple: #7c3aed;
+</div>
+
+<p class="prose">
+Estamos dizendo: sempre que eu precisar do roxo principal do projeto, posso reutilizar isso.
+</p>
+
+<p class="prose">
+<strong>5. Por que isso é MUITO importante?</strong><br>
+Imagine que o cliente quer trocar o roxo por azul.
+</p>
+
+<div class="warn">
+Sem variável: teria que trocar cor por cor no projeto inteiro.
+</div>
+
+<div class="tip">
+Com variável: muda em um único lugar.
+</div>
+
+<p class="prose">
+<strong>6. Aplicando no body</strong><br>
+Agora vamos estilizar o corpo da página.
+</p>
+
+<div class="code-block">
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+}
+</div>
+
+<p class="prose">
+<strong>O que está acontecendo aqui?</strong><br>
+<strong>background</strong> define o fundo do site.<br>
+<strong>color</strong> define a cor padrão dos textos.<br>
+<strong>font-family</strong> escolhe a fonte principal do projeto.
+</p>
+
+<p class="prose">
+Aqui usamos <strong>var(--font-body)</strong>, que pega a fonte Outfit definida no :root.
+</p>
+
+<p class="prose">
+<strong>7. Resetando estilos automáticos do navegador</strong>
+</p>
+
+<div class="code-block">
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+</div>
+
+<p class="prose">
+<strong>Por que isso existe?</strong><br>
+Os navegadores aplicam estilos automáticos, como margens, espaçamentos e tamanhos diferentes. Isso pode bagunçar o layout.
+</p>
+
+<div class="tip">
+Esse trecho zera tudo e deixa o projeto consistente.
+</div>
+
+<button class="done-btn" data-lesson="1">✔ Marcar como concluída
+</button>
+
+`
+},
+
+{
+  id:2,
+  category:'html',
+  title:'Aula 02 — Navbar Estrutural',
+  duration:'6min',
+  tag:'HTML',
+  quiz:{
+    question:'Qual tag HTML representa melhor uma área de navegação?',
+    options:[
+      'nav',
+      'article',
+      'footer'
+    ],
+    answer:0,
+    feedback:'Boa! A tag nav comunica semanticamente que aquele bloco contém navegação.'
+  },
+  content:`
+
+<p class="prose">
+<strong>O que vamos aprender hoje?</strong><br>
+Nessa aula vamos construir a navbar da Nova Tech.
+</p>
+
+<p class="prose">
+A navbar é a faixa que fica no topo do site. Ela ajuda o usuário a navegar pela página.
+</p>
+
+<p class="prose">
+Quase todo site possui uma navbar. Ela normalmente contém:
+</p>
+
+<div class="tip">
+<ul>
+  <li>logo</li>
+  <li>links</li>
+  <li>botão de contato</li>
+  <li>menu de navegação</li>
+</ul>
+</div>
+
+<p class="prose">
+<strong>1. Criando a estrutura da navbar</strong><br>
+Vamos começar pelo HTML.
+</p>
+
+<div class="code-block">
+&lt;nav&gt;
+  &lt;a class="logo" href="#"&gt;
+    NOVA &lt;span&gt;TECH&lt;/span&gt;
+  &lt;/a&gt;
+  &lt;ul class="nav-links"&gt;
+    &lt;li&gt;
+      &lt;a href="#home"&gt;Início&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href="#produtos"&gt;Produtos&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;
+</div>
+
+<p class="prose">
+<strong>Entendendo cada parte</strong>
+</p>
+
+<div class="code-block">
+&lt;nav&gt;
+&lt;/nav&gt;
+</div>
+
+<p class="prose">
+A tag &lt;nav&gt; serve para dizer ao navegador: essa área contém links de navegação.
+</p>
+
+<div class="tip">
+Isso melhora organização do código, acessibilidade, SEO e leitura por leitores de tela.
+</div>
+
+<div class="code-block">
+&lt;a href="#"&gt;
+</div>
+
+<p class="prose">
+A tag &lt;a&gt; cria um link clicável. O atributo href define para onde o usuário será enviado.
+</p>
+
+<p class="prose">
+<strong>O que significa href="#"?</strong><br>
+O símbolo # significa: ficar na própria página. Mais pra frente vamos trocar isso por links reais.
+</p>
+
+<p class="prose">
+<strong>Criando a logo</strong>
+</p>
+
+<div class="code-block">
+&lt;a class="logo" href="#"&gt;
+  NOVA &lt;span&gt;TECH&lt;/span&gt;
+&lt;/a&gt;
+</div>
+
+<p class="prose">
+Aqui criamos a logo do site usando texto.
+</p>
+
+<p class="prose">
+<strong>O que é class="logo"?</strong><br>
+A class serve para conectar o HTML ao CSS. Ela funciona como uma etiqueta.
+</p>
+
+<div class="code-block">
+.logo{
+  color: white;
+}
+</div>
+
+<p class="prose">
+<strong>O que é &lt;span&gt;?</strong>
+</p>
+
+<div class="code-block">
+&lt;span&gt;TECH&lt;/span&gt;
+</div>
+
+<p class="prose">
+O &lt;span&gt; serve para estilizar apenas uma parte do texto.
+</p>
+
+<div class="code-block">
+span{
+  color: purple;
+}
+</div>
+
+<div class="tip">
+Resultado: NOVA fica branco e TECH fica roxo. Isso cria destaque visual.
+</div>
+
+<p class="prose">
+<strong>Criando os links da navbar</strong>
+</p>
+
+<div class="code-block">
+&lt;ul class="nav-links"&gt;
+  &lt;li&gt;
+    &lt;a href="#home"&gt;Início&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="#produtos"&gt;Produtos&lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</div>
+
+<p class="prose">
+<strong>O que significa cada tag?</strong>
+</p>
+
+<div class="code-block">
+&lt;ul&gt;
+</div>
+
+<p class="prose">
+&lt;ul&gt; significa unordered list, ou seja, lista não ordenada.
+</p>
+
+<div class="code-block">
+&lt;li&gt;
+</div>
+
+<p class="prose">
+Cada &lt;li&gt; representa um item da lista.
+</p>
+
+<p class="prose">
+<strong>Links internos</strong>
+</p>
+
+<div class="code-block">
+&lt;a href="#produtos"&gt;
+</div>
+
+<p class="prose">
+Esse link procura um elemento com id="produtos".
+</p>
+
+<div class="code-block">
+&lt;section id="produtos"&gt;
+</div>
+
+<p class="prose">
+Quando o usuário clicar no link, a página vai rolar até essa seção.
+</p>
+
+<p class="prose">
+<strong>2. Estilizando a navbar com CSS</strong><br>
+Agora vamos organizar os elementos.
+</p>
+
+<div class="code-block">
+nav {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  backdrop-filter: blur(18px);
+}
+</div>
+
+<p class="prose">
+<strong>Entendendo o CSS</strong>
+</p>
+
+<div class="code-block">
+display: flex;
+</div>
+
+<p class="prose">
+Ativa o Flexbox. O Flexbox ajuda a alinhar elementos de forma simples.
+</p>
+
+<div class="warn">
+Sem ele, tudo fica bagunçado e os elementos podem quebrar linha.
+</div>
+
+<div class="tip">
+Com ele, os itens ficam lado a lado.
+</div>
+
+<div class="code-block">
+align-items: center;
+</div>
+
+<p class="prose">
+Centraliza os elementos verticalmente.
+</p>
+
+<div class="code-block">
+justify-content: space-between;
+</div>
+
+<p class="prose">
+Empurra a logo para a esquerda e os links para a direita.
+</p>
+
+<p class="prose">
+<strong>Navbar fixa no topo</strong>
+</p>
+
+<div class="code-block">
+position: sticky;
+top: 0;
+</div>
+
+<p class="prose">
+Isso faz a navbar acompanhar o scroll da página. Mesmo descendo o site, ela continua visível.
+</p>
+
+<div class="tip">
+Esse efeito é muito usado em landing pages, sites modernos e e-commerces.
+</div>
+
+<p class="prose">
+<strong>Efeito glassmorphism</strong>
+</p>
+
+<div class="code-block">
+backdrop-filter: blur(18px);
+</div>
+
+<p class="prose">
+Cria um efeito de vidro fosco atrás da navbar. Muito usado em interfaces modernas.
+</p>
+
+<div class="warn">
+Esse efeito funciona melhor quando existe transparência no fundo.
+</div>
+
+<div class="code-block">
+background: rgba(0,0,0,.5);
+</div>
+
+<p class="prose">
+<strong>Abrindo links externos em nova aba</strong>
+</p>
+
+<div class="code-block">
+&lt;a href="https://google.com" target="_blank"&gt;
+  Abrir site
+&lt;/a&gt;
+</div>
+
+<p class="prose">
+<strong>O que faz target="_blank"?</strong><br>
+Abre o link em uma nova aba. Isso evita que o usuário saia do seu site.
+</p>
+
+<p class="prose">
+<strong>Ao final dessa aula você aprendeu:</strong><br>
+✅ criar uma navbar semântica<br>
+✅ usar links com &lt;a&gt;<br>
+✅ criar listas de navegação<br>
+✅ usar Flexbox<br>
+✅ alinhar elementos horizontalmente<br>
+✅ deixar a navbar fixa<br>
+✅ criar efeito glassmorphism<br>
+✅ abrir links externos em nova aba
+</p>
+
+<button class="done-btn" data-lesson="2">
+✔ Marcar como concluída
+</button>
+
+`
+},
+
+{
+  id:3,
+  category:'css',
+  title:'Aula 03 — Hero em 2 Colunas',
+  duration:'8min',
+  tag:'CSS',
+  quiz:{
+    question:'Qual recurso CSS é ideal para criar uma hero em duas colunas?',
+    options:[
+      'CSS Grid',
+      'text-decoration',
+      'z-index'
+    ],
+    answer:0,
+    feedback:'Exato! CSS Grid facilita a criação de layouts em colunas bem controlados.'
+  },
+  content:`
+
+<p class="prose">
+Aprenda a criar a seção principal do site utilizando CSS Grid para dividir o layout em duas colunas: conteúdo e área visual.
+</p>
+
+<p class="prose">
+A Hero Section é a primeira área que o usuário vê quando entra no site. Ela normalmente contém:
+</p>
+
+<div class="tip">
+<ul>
+  <li>título principal</li>
+  <li>descrição</li>
+  <li>botões de ação</li>
+  <li>imagem ou ilustração</li>
+</ul>
+</div>
+
+<p class="prose">
+No projeto Nova Tech vamos criar uma hero moderna igual às utilizadas em sites profissionais.
+</p>
+
+<div class="code-block">
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  min-height: 88vh;
+}
+</div>
+
+<p class="prose">
+<strong>O que significa cada linha?</strong>
+</p>
+
+<div class="code-block">
+display: grid;
+</div>
+
+<p class="prose">
+Ativa o CSS Grid, uma ferramenta usada para criar layouts organizados em colunas e linhas.
+</p>
+
+<div class="code-block">
+grid-template-columns: 1fr 1fr;
+</div>
+
+<p class="prose">
+Cria 2 colunas com o mesmo tamanho.
+</p>
+
+<div class="tip">
+Na prática fica assim: | Conteúdo | Imagem |
+</div>
+
+<div class="code-block">
+align-items: center;
+</div>
+
+<p class="prose">
+Centraliza os elementos verticalmente dentro da seção.
+</p>
+
+<div class="code-block">
+min-height: 88vh;
+</div>
+
+<p class="prose">
+Define uma altura mínima baseada no tamanho da tela.
+</p>
+
+<div class="tip">
+vh significa viewport height. 100vh = altura total da tela do usuário.
+</div>
+
+<p class="prose">
+<strong>Criando texto com efeito gradient</strong><br>
+Agora vamos estilizar uma palavra do título com efeito degradê.
+</p>
+
+<div class="code-block">
+.hero-title em {
+  background: linear-gradient(
+    135deg,
+    #a855f7,
+    #c084fc
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+</div>
+
+<p class="prose">
+<strong>O que esse código faz?</strong>
+</p>
+
+<p class="prose">
+<strong>linear-gradient()</strong><br>
+Cria um degradê entre duas cores.
+</p>
+
+<p class="prose">
+<strong>-webkit-background-clip: text;</strong><br>
+Faz o fundo aparecer apenas dentro das letras.
+</p>
+
+<p class="prose">
+<strong>-webkit-text-fill-color: transparent;</strong><br>
+Remove a cor sólida do texto para mostrar o gradient.
+</p>
+
+<div class="tip">
+🎨 Esse efeito é muito utilizado em landing pages modernas porque deixa títulos mais tecnológicos e sofisticados.
+</div>
+
+<div class="warn">
+Sem o transparent, o gradient não aparece corretamente.
+</div>
+
+<button class="done-btn" data-lesson="3">
+✔ Marcar como concluída
+</button>
+
+`
+},
+
+{
+  id:4,
+  category:'css',
+  title:'Aula 04 — Cards de Produtos',
+  duration:'7min',
+  tag:'CSS',
+  quiz:{
+    question:'Qual propriedade cria o efeito de deslocamento no hover do card?',
+    options:[
+      'transform',
+      'font-size',
+      'display'
+    ],
+    answer:0,
+    feedback:'Isso! transform permite mover o card com fluidez sem bagunçar o layout.'
+  },
+  content:`
+
+<p class="prose">
+Agora vamos criar a seção de produtos da Nova Tech utilizando CSS Grid, imagens e efeitos modernos de hover.
+</p>
+
+<p class="prose">
+Essa parte é muito importante porque praticamente todo site moderno utiliza cards para organizar conteúdos como:
+</p>
+
+<div class="tip">
+<ul>
+  <li>produtos</li>
+  <li>serviços</li>
+  <li>planos</li>
+  <li>posts</li>
+  <li>jogos</li>
+  <li>categorias</li>
+</ul>
+</div>
+
+<p class="prose">
+No final da aula você terá:
+</p>
+
+<div class="tip">
+<ul>
+  <li>uma grade de produtos organizada</li>
+  <li>cards modernos</li>
+  <li>imagens funcionando corretamente</li>
+  <li>efeitos de animação no hover</li>
+  <li>aparência mais premium e profissional</li>
+</ul>
+</div>
+
+<p class="prose">
+<strong>1. Estrutura HTML do card</strong><br>
+Primeiro vamos criar o HTML de um produto.
+</p>
+
+<div class="code-block">
+&lt;div class="card"&gt;
+  &lt;img
+    src="./img/teclado.png"
+    alt="Teclado Gamer"
+  &gt;
+  &lt;h3&gt;Teclado Gamer&lt;/h3&gt;
+  &lt;p&gt;
+    RGB mecânico para alta performance.
+  &lt;/p&gt;
+&lt;/div&gt;
+</div>
+
+<p class="prose">
+<strong>O que significa cada parte?</strong>
+</p>
+
+<div class="code-block">
+&lt;img src="./img/teclado.png"&gt;
+</div>
+
+<p class="prose">
+A tag &lt;img&gt; adiciona imagens no site.
+</p>
+
+<p class="prose">
+<strong>src=""</strong><br>
+O src informa onde a imagem está localizada.
+</p>
+
+<div class="code-block">
+./img/teclado.png
+</div>
+
+<p class="prose">
+Isso significa: procure uma pasta chamada img e, dentro dela, uma imagem chamada teclado.png.
+</p>
+
+<p class="prose">
+<strong>Como organizar imagens corretamente?</strong><br>
+O ideal é criar uma estrutura assim:
+</p>
+
+<div class="code-block">
+projeto/
+|
+|-- index.html
+|-- style.css
+|
+|-- img/
+    |-- teclado.png
+    |-- mouse.png
+    |-- headset.png
+</div>
+
+<div class="tip">
+Isso deixa o projeto organizado e facilita manutenção.
+</div>
+
+<p class="prose">
+<strong>O que é o alt?</strong>
+</p>
+
+<div class="code-block">
+alt="Teclado Gamer"
+</div>
+
+<p class="prose">
+O alt é uma descrição da imagem.
+</p>
+
+<div class="tip">
+Ele é importante para acessibilidade, leitores de tela, SEO e quando a imagem não carrega.
+</div>
+
+<div class="warn">
+Nunca deixe imagens importantes sem alt.
+</div>
+
+<p class="prose">
+<strong>2. Criando a grade de produtos</strong><br>
+Agora vamos organizar os cards em colunas.
+</p>
+
+<div class="code-block">
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+</div>
+
+<p class="prose">
+<strong>Entendendo o código</strong>
+</p>
+
+<div class="code-block">
+display: grid;
+</div>
+
+<p class="prose">
+Ativa o CSS Grid.
+</p>
+
+<div class="code-block">
+grid-template-columns: repeat(3, 1fr);
+</div>
+
+<p class="prose">
+Cria 3 colunas com tamanhos iguais.
+</p>
+
+<div class="tip">
+Na prática: | Card | Card | Card |
+</div>
+
+<div class="code-block">
+gap: 1.5rem;
+</div>
+
+<p class="prose">
+Cria espaçamento entre os cards.
+</p>
+
+<div class="tip">
+rem é uma unidade responsiva muito utilizada no CSS moderno.
+</div>
+
+<p class="prose">
+<strong>3. Estilizando os cards</strong><br>
+Agora vamos deixar os cards mais bonitos.
+</p>
+
+<div class="code-block">
+.card {
+  background: #11111a;
+  border: 1px solid #232336;
+  border-radius: 24px;
+  padding: 1.5rem;
+}
+</div>
+
+<p class="prose">
+<strong>O que esse código faz?</strong>
+</p>
+
+<div class="tip">
+<ul>
+  <li>background define o fundo</li>
+  <li>border cria uma borda</li>
+  <li>border-radius arredonda os cantos</li>
+  <li>padding cria espaçamento interno</li>
+</ul>
+</div>
+
+<div class="tip">
+Cantos arredondados deixam a interface mais moderna.
+</div>
+
+<p class="prose">
+<strong>4. Criando efeito hover</strong><br>
+Agora vamos adicionar animação quando o usuário passa o mouse no card.
+</p>
+
+<div class="code-block">
+.card:hover {
+  transform: translateY(-6px);
+  border-color: var(--purple);
+  box-shadow:
+    0 20px 40px
+    rgba(124,58,237,.15);
+}
+</div>
+
+<p class="prose">
+<strong>O que significa cada linha?</strong>
+</p>
+
+<div class="code-block">
+transform: translateY(-6px);
+</div>
+
+<p class="prose">
+Move o card levemente para cima.
+</p>
+
+<div class="code-block">
+border-color: var(--purple);
+</div>
+
+<p class="prose">
+Troca a cor da borda para o roxo principal do projeto.
+</p>
+
+<div class="code-block">
+box-shadow
+</div>
+
+<p class="prose">
+Cria sombra. Isso dá sensação de profundidade e destaque.
+</p>
+
+<div class="tip">
+🚀 Pequenos movimentos e sombras deixam a interface mais premium e profissional.
+</div>
+
+<p class="prose">
+<strong>Resultado final</strong><br>
+Depois dessa aula seu projeto já começa a parecer um site real do mercado.
+</p>
+
+<p class="prose">
+<strong>Você aprendeu:</strong><br>
+✅ como adicionar imagens<br>
+✅ como organizar arquivos<br>
+✅ como criar grids modernos<br>
+✅ como fazer cards profissionais<br>
+✅ como criar efeitos hover<br>
+✅ como deixar interfaces mais sofisticadas
+</p>
+
+<button class="done-btn" data-lesson="4">
+✔ Marcar como concluída
+</button>
+
+`
+},
+
+{
+  id:5,
+  category:'html',
+  title:'Aula 05 — Seção About',
+  duration:'6min',
+  tag:'HTML',
+  quiz:{
+    question:'Qual é a função principal de uma seção About?',
+    options:[
+      'Apresentar contexto e diferenciais da marca',
+      'Criar variáveis CSS',
+      'Abrir o WhatsApp'
+    ],
+    answer:0,
+    feedback:'Perfeito! A seção About explica a marca e ajuda o visitante a confiar no projeto.'
+  },
+  content:`
+
+<p class="prose">
+Agora vamos criar a seção About da Nova Tech.
+</p>
+
+<p class="prose">
+A seção About (Sobre) é usada para apresentar a empresa, produto ou projeto. Ela ajuda o usuário a entender:
+</p>
+
+<div class="tip">
+<ul>
+  <li>o que a marca faz</li>
+  <li>quais são os diferenciais</li>
+  <li>por que ela parece confiável</li>
+  <li>quais benefícios oferece</li>
+</ul>
+</div>
+
+<p class="prose">
+Sites profissionais quase sempre possuem uma seção assim.
+</p>
+
+<p class="prose">
+No projeto Nova Tech vamos criar:
+</p>
+
+<div class="tip">
+<ul>
+  <li>uma área de texto explicativa</li>
+  <li>uma organização em duas colunas</li>
+  <li>cards de diferenciais (features)</li>
+</ul>
+</div>
+
+<p class="prose">
+<strong>1. Estrutura HTML da seção About</strong><br>
+Primeiro vamos criar a estrutura principal.
+</p>
+
+<div class="code-block">
+&lt;section class="about"&gt;
+  &lt;div class="about-content"&gt;
+    &lt;small&gt;SOBRE&lt;/small&gt;
+    &lt;h2&gt;
+      Tecnologia e performance
+      para gamers modernos
+    &lt;/h2&gt;
+    &lt;p&gt;
+      A Nova Tech desenvolve setups
+      modernos para quem busca
+      alta performance e visual premium.
+    &lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="about-features"&gt;
+    &lt;div class="feature-card"&gt;
+      RGB Premium
+    &lt;/div&gt;
+    &lt;div class="feature-card"&gt;
+      Alta Performance
+    &lt;/div&gt;
+    &lt;div class="feature-card"&gt;
+      Design Gamer
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+</div>
+
+<p class="prose">
+<strong>O que significa cada parte?</strong>
+</p>
+
+<div class="code-block">
+&lt;section class="about"&gt;
+</div>
+
+<p class="prose">
+Cria uma seção semântica chamada About.
+</p>
+
+<div class="tip">
+Tags semânticas ajudam organização, acessibilidade e SEO.
+</div>
+
+<div class="code-block">
+&lt;div class="about-content"&gt;
+</div>
+
+<p class="prose">
+Essa área guarda os textos principais da seção.
+</p>
+
+<div class="code-block">
+&lt;div class="about-features"&gt;
+</div>
+
+<p class="prose">
+Aqui ficam os cards com os diferenciais da marca.
+</p>
+
+<p class="prose">
+<strong>O que são features?</strong><br>
+Features são características ou benefícios destacados visualmente.
+</p>
+
+<div class="tip">
+<ul>
+  <li>entrega rápida</li>
+  <li>alta performance</li>
+  <li>suporte premium</li>
+  <li>tecnologia gamer</li>
+  <li>design moderno</li>
+</ul>
+</div>
+
+<div class="tip">
+Features ajudam o usuário a entender rapidamente os pontos fortes da marca.
+</div>
+
+<p class="prose">
+<strong>2. Criando layout em duas colunas</strong><br>
+Agora vamos organizar a seção com CSS Grid.
+</p>
+
+<div class="code-block">
+.about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+}
+</div>
+
+<p class="prose">
+<strong>Entendendo o código</strong>
+</p>
+
+<div class="code-block">
+display: grid;
+</div>
+
+<p class="prose">
+Ativa o CSS Grid.
+</p>
+
+<div class="code-block">
+grid-template-columns: 1fr 1fr;
+</div>
+
+<p class="prose">
+Cria duas colunas iguais.
+</p>
+
+<div class="tip">
+Na prática: | Texto | Features |
+</div>
+
+<div class="code-block">
+gap: 4rem;
+</div>
+
+<p class="prose">
+Cria espaço entre as colunas.
+</p>
+
+<div class="tip">
+Sem gap os elementos ficam grudados.
+</div>
+
+<p class="prose">
+<strong>3. Organizando os cards de features</strong><br>
+Agora vamos organizar os diferenciais.
+</p>
+
+<div class="code-block">
+.about-features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+</div>
+
+<p class="prose">
+<strong>O que esse código faz?</strong>
+</p>
+
+<div class="code-block">
+repeat(3, 1fr)
+</div>
+
+<p class="prose">
+Cria 3 colunas iguais automaticamente.
+</p>
+
+<div class="tip">
+Resultado: | Card | Card | Card |
+</div>
+
+<p class="prose">
+<strong>4. Estilizando os cards</strong><br>
+Agora vamos deixar os diferenciais mais bonitos.
+</p>
+
+<div class="code-block">
+.feature-card {
+  padding: 1.5rem;
+  border-radius: 20px;
+  background: #11111a;
+  border: 1px solid #232336;
+}
+</div>
+
+<p class="prose">
+<strong>O que significa?</strong>
+</p>
+
+<div class="tip">
+<ul>
+  <li>padding cria espaço interno</li>
+  <li>border-radius cria cantos arredondados</li>
+  <li>background define o fundo do card</li>
+  <li>border cria a borda do elemento</li>
+</ul>
+</div>
+
+<div class="tip">
+🎨 Esses pequenos detalhes fazem a interface parecer mais moderna e premium.
+</div>
+
+<p class="prose">
+<strong>Resultado final</strong><br>
+Depois dessa aula seu projeto terá uma seção mais profissional e confiável.
+</p>
+
+<p class="prose">
+<strong>Você aprendeu:</strong><br>
+✅ como criar uma seção About<br>
+✅ como usar CSS Grid em duas colunas<br>
+✅ como organizar features<br>
+✅ como criar cards visuais<br>
+✅ como destacar diferenciais da marca
+</p>
+
+<button class="done-btn" data-lesson="5">
+✔ Marcar como concluída
+</button>
+
+`
+},
+
+{
+  id:6,
+  category:'html',
+  title:'Aula 06 — Footer em 4 Colunas',
+  duration:'6min',
+  tag:'HTML',
+  quiz:{
+    question:'Por que organizar o footer em colunas?',
+    options:[
+      'Para agrupar links, contato e informações importantes',
+      'Para remover a responsividade',
+      'Para esconder o conteúdo principal'
+    ],
+    answer:0,
+    feedback:'Certo! Colunas deixam o rodapé mais escaneável e profissional.'
+  },
+  content:`
+
+<p class="prose">
+Agora vamos criar o footer da Nova Tech.
+</p>
+
+<p class="prose">
+O footer é o rodapé do site. Ele aparece no final da página e normalmente contém:
+</p>
+
+<div class="tip">
+<ul>
+  <li>links importantes</li>
+  <li>redes sociais</li>
+  <li>contato</li>
+  <li>localização</li>
+  <li>informações da empresa</li>
+  <li>direitos autorais</li>
+</ul>
+</div>
+
+<p class="prose">
+Mesmo sendo a última parte do site, o footer é muito importante porque ajuda organização, navegação e profissionalismo.
+</p>
+
+<p class="prose">
+No mercado, um footer bem feito transmite mais confiança para o usuário.
+</p>
+
+<p class="prose">
+<strong>1. Estrutura HTML do footer</strong><br>
+Primeiro vamos criar a estrutura principal.
+</p>
+
+<div class="code-block">
+&lt;footer&gt;
+  &lt;div class="footer-grid"&gt;
+    &lt;div&gt;
+      &lt;h3&gt;Nova Tech&lt;/h3&gt;
+      &lt;p&gt;
+        Tecnologia gamer moderna
+        para setups profissionais.
+      &lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;h4&gt;Navegação&lt;/h4&gt;
+      &lt;ul&gt;
+        &lt;li&gt;Início&lt;/li&gt;
+        &lt;li&gt;Produtos&lt;/li&gt;
+        &lt;li&gt;Contato&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;h4&gt;Contato&lt;/h4&gt;
+      &lt;p&gt;(41) 99999-9999&lt;/p&gt;
+      &lt;p&gt;contato@novatech.com&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;h4&gt;Redes&lt;/h4&gt;
+      &lt;p&gt;Instagram&lt;/p&gt;
+      &lt;p&gt;Threads&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="footer-bottom"&gt;
+    © 2026 Nova Tech
+  &lt;/div&gt;
+&lt;/footer&gt;
+</div>
+
+<p class="prose">
+<strong>O que significa cada parte?</strong>
+</p>
+
+<div class="code-block">
+&lt;footer&gt;
+</div>
+
+<p class="prose">
+A tag &lt;footer&gt; representa o rodapé do site.
+</p>
+
+<div class="tip">
+É uma tag semântica importante para acessibilidade e SEO.
+</div>
+
+<div class="code-block">
+&lt;div class="footer-grid"&gt;
+</div>
+
+<p class="prose">
+Essa área organiza todo o conteúdo do footer em colunas.
+</p>
+
+<div class="code-block">
+&lt;div class="footer-bottom"&gt;
+</div>
+
+<p class="prose">
+Área inferior usada para direitos autorais ou informações finais.
+</p>
+
+<p class="prose">
+<strong>2. Criando as colunas do footer</strong><br>
+Agora vamos transformar o footer em um layout organizado.
+</p>
+
+<div class="code-block">
+.footer-grid {
+  display: grid;
+  grid-template-columns:
+    1.6fr 1fr 1.2fr 1.2fr;
+  gap: 2.5rem;
+}
+</div>
+
+<p class="prose">
+<strong>Entendendo o código</strong>
+</p>
+
+<div class="code-block">
+display: grid;
+</div>
+
+<p class="prose">
+Ativa o CSS Grid.
+</p>
+
+<div class="code-block">
+grid-template-columns:
+1.6fr 1fr 1.2fr 1.2fr;
+</div>
+
+<p class="prose">
+Cria 4 colunas com tamanhos diferentes.
+</p>
+
+<div class="tip">
+Na prática: | Logo | Navegação | Contato | Redes |
+</div>
+
+<p class="prose">
+<strong>Por que a primeira coluna é maior?</strong>
+</p>
+
+<div class="code-block">
+1.6fr
+</div>
+
+<p class="prose">
+A primeira coluna recebe mais espaço porque normalmente contém logo, descrição da empresa e textos maiores. As outras colunas precisam de menos espaço.
+</p>
+
+<div class="tip">
+Isso cria um layout mais equilibrado visualmente.
+</div>
+
+<div class="code-block">
+gap: 2.5rem;
+</div>
+
+<p class="prose">
+Cria espaçamento entre as colunas. Sem isso, tudo ficaria muito apertado.
+</p>
+
+<p class="prose">
+<strong>3. Centralizando a parte inferior</strong><br>
+Agora vamos estilizar a área final do footer.
+</p>
+
+<div class="code-block">
+.footer-bottom {
+  text-align: center;
+  margin-top: 3rem;
+}
+</div>
+
+<p class="prose">
+<strong>O que significa?</strong>
+</p>
+
+<div class="code-block">
+text-align: center;
+</div>
+
+<p class="prose">
+Centraliza o texto horizontalmente.
+</p>
+
+<div class="code-block">
+margin-top: 3rem;
+</div>
+
+<p class="prose">
+Cria espaço acima da área inferior.
+</p>
+
+<div class="tip">
+Isso evita que o copyright fique grudado nas colunas.
+</div>
+
+<p class="prose">
+<strong>4. Resultado visual</strong><br>
+Depois dessa aula seu projeto terá:
+</p>
+
+<p class="prose">
+✅ rodapé profissional<br>
+✅ layout organizado<br>
+✅ navegação mais clara<br>
+✅ informações bem distribuídas<br>
+✅ aparência mais moderna
+</p>
+
+<div class="tip">
+📦 Footers ajudam usuários a encontrar informações importantes rapidamente e deixam qualquer site mais completo.
+</div>
+
+<button class="done-btn" data-lesson="6">
+✔ Marcar como concluída
+</button>
+
+`
+},
+
+{
+  id:7,
+  category:'css',
+  title:'Aula 07 — Botões Reutilizáveis',
+  duration:'5min',
+  tag:'CSS',
+  quiz:{
+    question:'Qual é a vantagem de criar classes reutilizáveis para botões?',
+    options:[
+      'Manter consistência visual e evitar repetição',
+      'Impedir cliques',
+      'Remover todos os estilos globais'
+    ],
+    answer:0,
+    feedback:'Isso mesmo! Classes reutilizáveis deixam o CSS mais limpo e consistente.'
+  },
+  content:`
+
+<p class="prose">
+Agora vamos aprender um conceito MUITO importante no desenvolvimento frontend profissional: componentes reutilizáveis.
+</p>
+
+<p class="prose">
+Em vez de criar um botão diferente toda vez, vamos criar uma classe padrão que pode ser reutilizada no projeto inteiro.
+</p>
+
+<div class="tip">
+Isso é exatamente o que empresas e projetos reais fazem.
+</div>
+
+<p class="prose">
+<strong>Por que isso é importante?</strong><br>
+Imagine criar botão do menu, botão do banner, botão do WhatsApp e botão do footer. Se cada botão tiver um CSS diferente, o projeto vira uma bagunça rapidamente.
+</p>
+
+<div class="tip">
+O ideal é criar uma base reutilizável.
+</div>
+
+<p class="prose">
+<strong>1. Criando a classe principal do botão</strong><br>
+Vamos começar criando a estrutura base.
+</p>
+
+<div class="code-block">
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .6rem 1.4rem;
+}
+</div>
+
+<p class="prose">
+<strong>O que significa cada linha?</strong>
+</p>
+
+<div class="code-block">
+display: inline-flex;
+</div>
+
+<p class="prose">
+Transforma o botão em um elemento flexível. Isso ajuda a alinhar texto e ícones corretamente.
+</p>
+
+<div class="tip">
+Muito usado em botões modernos com emojis ou ícones.
+</div>
+
+<div class="code-block">
+align-items: center;
+</div>
+
+<p class="prose">
+Centraliza os elementos verticalmente.
+</p>
+
+<div class="code-block">
+gap: .5rem;
+</div>
+
+<p class="prose">
+Cria espaço entre ícone e texto.
+</p>
+
+<div class="tip">
+Exemplo: 🚀 Começar. Sem gap os elementos ficam grudados.
+</div>
+
+<div class="code-block">
+padding: .6rem 1.4rem;
+</div>
+
+<p class="prose">
+Cria espaço interno no botão.
+</p>
+
+<div class="tip">
+Padding deixa o botão maior, mais confortável e mais bonito visualmente.
+</div>
+
+<p class="prose">
+<strong>2. Criando efeito hover</strong><br>
+Agora vamos adicionar interação.
+</p>
+
+<div class="code-block">
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 32px
+    var(--purple-glow);
+}
+</div>
+
+<p class="prose">
+<strong>O que esse código faz?</strong>
+</p>
+
+<div class="code-block">
+:hover
+</div>
+
+<p class="prose">
+O hover acontece quando o usuário passa o mouse em cima do elemento.
+</p>
+
+<div class="code-block">
+transform: translateY(-2px);
+</div>
+
+<p class="prose">
+Move o botão levemente para cima.
+</p>
+
+<div class="tip">
+Pequenos movimentos deixam interfaces mais modernas e sofisticadas.
+</div>
+
+<div class="code-block">
+box-shadow
+</div>
+
+<p class="prose">
+Adiciona brilho/sombra ao botão. Isso cria sensação de profundidade e destaque.
+</p>
+
+<p class="prose">
+<strong>3. O que significa reutilizar componentes?</strong><br>
+Agora qualquer botão pode usar a classe .btn.
+</p>
+
+<div class="code-block">
+&lt;a class="btn"&gt;
+  Comprar agora
+&lt;/a&gt;
+</div>
+
+<div class="code-block">
+&lt;button class="btn"&gt;
+  Entrar
+&lt;/button&gt;
+</div>
+
+<div class="tip">
+Um único CSS funciona para vários botões diferentes.
+</div>
+
+<p class="prose">
+<strong>4. Vantagens reais disso</strong><br>
+Utilizar componentes reutilizáveis ajuda a:
+</p>
+
+<p class="prose">
+✅ evitar repetição<br>
+✅ manter consistência visual<br>
+✅ facilitar manutenção<br>
+✅ deixar o código mais profissional<br>
+✅ acelerar desenvolvimento
+</p>
+
+<div class="warn">
+⚡ Projetos grandes funcionam quase inteiramente com componentes reutilizáveis.
+</div>
+
+<p class="prose">
+<strong>Resultado final</strong><br>
+Depois dessa aula seu projeto terá botões muito mais modernos e profissionais.
+</p>
+
+<p class="prose">
+<strong>Você aprendeu:</strong><br>
+✅ como criar classes reutilizáveis<br>
+✅ como alinhar conteúdo com Flexbox<br>
+✅ como criar hover moderno<br>
+✅ como adicionar movimento e brilho<br>
+✅ como organizar melhor o CSS
+</p>
+
+<div class="warn">
+⚡ Utilizar classes reutilizáveis evita repetição e deixa o projeto mais escalável.
+</div>
+
+<button class="done-btn" data-lesson="7">
+✔ Marcar como concluída
+</button>
+
+`
+},
+
+{
+  id:8,
+  category:'css',
+  title:'Aula 08 — Responsividade + Media Queries',
+  duration:'5min',
+  tag:'CSS',
+  quiz:{
+    question:'Para que servem media queries?',
+    options:[
+      'Adaptar o layout para diferentes tamanhos de tela',
+      'Criar links externos',
+      'Trocar tags HTML automaticamente'
+    ],
+    answer:0,
+    feedback:'Boa! Media queries permitem ajustar a interface para desktop, tablet e mobile.'
+  },
+  content:`
+
+<p class="prose">
+Agora vamos transformar a Nova Tech em um site responsivo.
+</p>
+
+<div class="tip">
+Responsividade significa adaptar o layout para diferentes tamanhos de tela.
+</div>
+
+<p class="prose">
+Hoje os usuários acessam sites por celulares, notebooks, tablets e monitores ultrawide.
+</p>
+
+<p class="prose">
+Se o site não funcionar bem no mobile, ele parece amador e perde muitos usuários. Por isso, responsividade é obrigatória em qualquer projeto moderno.
+</p>
+
+<p class="prose">
+<strong>O que são Media Queries?</strong><br>
+Media Queries são regras do CSS que permitem alterar o layout dependendo do tamanho da tela.
+</p>
+
+<div class="tip">
+Exemplo: desktop usa layout em colunas; celular usa layout empilhado.
+</div>
+
+<p class="prose">
+<strong>1. Responsividade para tablets</strong><br>
+Vamos começar ajustando o layout para telas menores.
+</p>
+
+<div class="code-block">
+@media (max-width: 960px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</div>
+
+<p class="prose">
+<strong>O que significa isso?</strong>
+</p>
+
+<div class="code-block">
+@media (max-width: 960px)
+</div>
+
+<p class="prose">
+Significa: aplique essas regras quando a tela tiver até 960px de largura.
+</p>
+
+<div class="tip">
+Ou seja: tablets, notebooks menores e telas médias.
+</div>
+
+<p class="prose">
+<strong>Transformando 2 colunas em 1</strong>
+</p>
+
+<div class="code-block">
+.hero {
+  grid-template-columns: 1fr;
+}
+</div>
+
+<div class="tip">
+Antes: | Texto | Imagem |<br>
+Depois no mobile/tablet:<br>
+| Texto |<br>
+| Imagem |
+</div>
+
+<p class="prose">
+Isso evita elementos apertados horizontalmente.
+</p>
+
+<p class="prose">
+<strong>Ajustando os produtos</strong>
+</p>
+
+<div class="code-block">
+.products-grid {
+  grid-template-columns: 1fr;
+}
+</div>
+
+<div class="tip">
+Antes: | Card | Card | Card |<br>
+Depois:<br>
+| Card |<br>
+| Card |<br>
+| Card |
+</div>
+
+<p class="prose">
+Cards maiores ficam mais confortáveis no celular.
+</p>
+
+<p class="prose">
+<strong>2. Responsividade para celulares</strong><br>
+Agora vamos adaptar telas pequenas.
+</p>
+
+<div class="code-block">
+@media (max-width: 600px) {
+  .nav-links {
+    display: none;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</div>
+
+<p class="prose">
+<strong>O que esse código faz?</strong>
+</p>
+
+<div class="code-block">
+display: none;
+</div>
+
+<p class="prose">
+Esconde os links do menu no celular.
+</p>
+
+<div class="tip">
+Em projetos reais normalmente usamos menu hambúrguer no mobile.
+</div>
+
+<p class="prose">
+<strong>Ajustando o footer</strong>
+</p>
+
+<div class="code-block">
+.footer-grid {
+  grid-template-columns: 1fr;
+}
+</div>
+
+<div class="tip">
+Antes: | Logo | Navegação | Contato | Redes |<br>
+Depois:<br>
+| Logo |<br>
+| Navegação |<br>
+| Contato |<br>
+| Redes |
+</div>
+
+<p class="prose">
+Isso melhora leitura e organização no celular.
+</p>
+
+<p class="prose">
+<strong>Como saber quais tamanhos usar?</strong><br>
+Os mais comuns são:
+</p>
+
+<p class="prose">
+1200px → desktop<br>
+960px → tablet<br>
+768px → tablet menor<br>
+600px → celular
+</p>
+
+<div class="tip">
+Esses valores podem mudar dependendo do projeto.
+</div>
+
+<p class="prose">
+<strong>Dica MUITO importante</strong><br>
+Durante o desenvolvimento:
+</p>
+
+<p class="prose">
+✅ teste o site diminuindo a janela<br>
+✅ abra o modo responsivo do navegador<br>
+✅ veja como tudo se comporta no mobile
+</p>
+
+<div class="warn">
+Um site bonito no desktop pode quebrar completamente no celular.
+</div>
+
+<p class="prose">
+<strong>Resultado final</strong><br>
+Depois dessa aula seu projeto ficará muito mais profissional.
+</p>
+
+<p class="prose">
+<strong>Você aprendeu:</strong><br>
+✅ o que são media queries<br>
+✅ como adaptar layouts<br>
+✅ como transformar colunas em linhas<br>
+✅ como melhorar experiência mobile<br>
+✅ como criar responsividade real
+</p>
+
+<div class="tip">
+📱 Responsividade é uma das habilidades mais importantes do frontend moderno.
+</div>
+
+<button class="done-btn" data-lesson="8">
+✔ Marcar como concluída
+</button>
+
+`
+},
+
+{
+  id:9,
+  category:'js',
+  title:'Aula 09 — Redirecionando para WhatsApp',
+  duration:'5min',
+  tag:'Usabilidade',
+  quiz:{
+    question:'Qual formato de link abre uma conversa direta no WhatsApp?',
+    options:[
+      'https://wa.me/numero',
+      'mailto:numero',
+      'ftp://whatsapp'
+    ],
+    answer:0,
+    feedback:'Certinho! Links wa.me abrem uma conversa direta no WhatsApp.'
+  },
+  content:`
+
+<p class="prose">
+Agora vamos adicionar uma das funcionalidades mais utilizadas em landing pages modernas: botão de contato direto no WhatsApp.
+</p>
+
+<p class="prose">
+Hoje muitas empresas utilizam WhatsApp para vendas, suporte, orçamento, atendimento e captação de clientes.
+</p>
+
+<p class="prose">
+Por isso, aprender esse recurso é extremamente útil para projetos reais.
+</p>
+
+<div class="tip">
+E o melhor: tudo isso funciona usando apenas HTML.
+</div>
+
+<p class="prose">
+<strong>1. Criando o link do WhatsApp</strong><br>
+Vamos começar criando um botão simples.
+</p>
+
+<div class="code-block">
+&lt;a
+  href="https://wa.me/5541988247728"
+  target="_blank"
+&gt;
+  Fale no WhatsApp
+&lt;/a&gt;
+</div>
+
+<p class="prose">
+<strong>O que significa cada parte?</strong>
+</p>
+
+<div class="code-block">
+&lt;a&gt;
+</div>
+
+<p class="prose">
+A tag &lt;a&gt; cria links clicáveis.
+</p>
+
+<div class="code-block">
+href=""
+</div>
+
+<p class="prose">
+O href define para onde o usuário será enviado ao clicar.
+</p>
+
+<p class="prose">
+<strong>Estrutura do link wa.me</strong>
+</p>
+
+<div class="code-block">
+https://wa.me/5541988247728
+</div>
+
+<p class="prose">
+Esse formato abre uma conversa direta no WhatsApp.
+</p>
+
+<p class="prose">
+<strong>Como funciona o número?</strong><br>
+O número precisa seguir este padrão: código do país + DDD + número.
+</p>
+
+<div class="code-block">
+55 41 98824-7728
+</div>
+
+<p class="prose">
+Sem espaços:
+</p>
+
+<div class="code-block">
+5541988247728
+</div>
+
+<div class="warn">
+Não utilize espaços, parênteses ou hífens no link final.
+</div>
+
+<p class="prose">
+<strong>2. Abrindo em outra aba</strong>
+</p>
+
+<div class="code-block">
+target="_blank"
+</div>
+
+<p class="prose">
+Faz o WhatsApp abrir em outra aba.
+</p>
+
+<div class="tip">
+Assim o usuário não sai do seu site. Isso melhora experiência e retenção.
+</div>
+
+<p class="prose">
+<strong>3. Enviando mensagem automática</strong><br>
+Agora vamos deixar ainda mais profissional.
+</p>
+
+<div class="code-block">
+href="https://wa.me/5541988247728?text=Olá%2C%20vim%20pelo%20site!"
+</div>
+
+<p class="prose">
+<strong>O que isso faz?</strong><br>
+Quando o usuário clicar, o WhatsApp já abrirá com uma mensagem pronta.
+</p>
+
+<div class="tip">
+Exemplo: Olá, vim pelo site! Isso facilita muito o contato.
+</div>
+
+<p class="prose">
+<strong>Mas por que aparecem símbolos estranhos?</strong>
+</p>
+
+<div class="code-block">
+%20
+</div>
+
+<p class="prose">
+Representa espaço. Isso acontece porque URLs não aceitam espaços normais.
+</p>
+
+<p class="prose">
+<strong>Como criar mensagens personalizadas?</strong><br>
+Você pode trocar a frase por qualquer texto.
+</p>
+
+<div class="code-block">
+Olá! Gostaria de solicitar um orçamento.
+</div>
+
+<p class="prose">
+Convertido para URL:
+</p>
+
+<div class="code-block">
+Olá!%20Gostaria%20de%20solicitar%20um%20orçamento.
+</div>
+
+<p class="prose">
+<strong>4. Transformando em botão profissional</strong><br>
+Agora vamos aplicar a classe .btn.
+</p>
+
+<div class="code-block">
+&lt;a
+  class="btn"
+  href="https://wa.me/5541988247728"
+  target="_blank"
+&gt;
+  💬 Fale no WhatsApp
+&lt;/a&gt;
+</div>
+
+<div class="tip">
+Isso deixa o link com aparência de botão moderno.
+</div>
+
+<p class="prose">
+<strong>Resultado final</strong><br>
+Depois dessa aula seu projeto terá contato direto via WhatsApp funcionando profissionalmente.
+</p>
+
+<p class="prose">
+<strong>Você aprendeu:</strong><br>
+✅ como criar links clicáveis<br>
+✅ como funciona o wa.me<br>
+✅ como abrir links em nova aba<br>
+✅ como criar mensagens automáticas<br>
+✅ como transformar links em botões
+</p>
+
+<div class="warn">
+🚀 O site funciona perfeitamente mesmo sem JavaScript porque o HTML já possui recursos muito poderosos.
+</div>
+
+<button class="done-btn" data-lesson="9">
+✔ Marcar como concluída
+</button>
+
+`
+}
+
+];
+
+const container = document.getElementById('container');
+const quizModal = document.getElementById('quizModal');
+const quizTitle = document.getElementById('quizTitle');
+const quizQuestion = document.getElementById('quizQuestion');
+const quizOptions = document.getElementById('quizOptions');
+const quizFeedback = document.getElementById('quizFeedback');
+const quizClose = document.getElementById('quizClose');
+
+let completedLessons = 0;
+const completedLessonIds = new Set();
+
+function openQuiz(id){
+
+const lesson = lessons.find(l => l.id === id);
+
+if(!lesson || !lesson.quiz) return;
+
+quizModal.classList.add('show');
+
+quizTitle.innerText = lesson.title;
+quizQuestion.innerText = lesson.quiz.question;
+
+quizFeedback.className = 'quiz-feedback';
+quizFeedback.innerHTML = '';
+
+quizOptions.innerHTML = '';
+
+lesson.quiz.options.forEach((option,index)=>{
+
+const btn = document.createElement('button');
+
+btn.className = 'quiz-option';
+btn.innerText = option;
+
+btn.addEventListener('click',()=>{
+
+const correct = index === lesson.quiz.answer;
+
+quizFeedback.className = `quiz-feedback show ${correct ? 'correct' : 'wrong'}`;
+
+quizFeedback.innerHTML = correct
+? '✅ ' + lesson.quiz.feedback
+: '❌ Quase! Revise essa aula e tente novamente.';
+
+if(correct && !completedLessonIds.has(lesson.id)){
+
+completedLessonIds.add(lesson.id);
+completedLessons++;
+
+updateProgress();
+markCompletedLessons();
+
+}
+
+});
+
+quizOptions.appendChild(btn);
+
+});
+
+}
+
+function updateProgress(){
+
+const total = lessons.length;
+
+document.getElementById('pp').innerText =
+`${completedLessons} / ${total} concluídas`;
+
+const percent = (completedLessons / total) * 100;
+
+document.getElementById('pf').style.width =
+percent + '%';
+
+}
+
+function markCompletedLessons(){
+
+completedLessonIds.forEach(id=>{
+
+document
+.querySelectorAll(`.done-btn[data-lesson="${id}"]`)
+.forEach(button=>button.classList.add('done'));
+
+});
+
+}
+
+function renderLessons(filter='all'){
+
+container.innerHTML='';
+
+const filtered = filter === 'all'
+? lessons
+: lessons.filter(l => l.category === filter);
+
+filtered.forEach((lesson,index)=>{
+
+container.innerHTML += `
+
+<div class="lesson-card">
+
+<div class="lesson-header">
+
+<div class="num">
+${String(lesson.id).padStart(2,'0')}
+</div>
+
+<div class="lesson-meta">
+
+<div class="lesson-title">
+
+${lesson.title}
+
+<span class="tag ${lesson.category === 'html' ? 't-html' : lesson.category === 'css' ? 't-css' : 't-js'}">
+${lesson.tag}
+</span>
+
+</div>
+
+<div class="lesson-sub">
+Conteúdo prático e aplicado
+</div>
+
+</div>
+
+<div class="dur">
+${lesson.duration}
+</div>
+
+<div class="chev">
+⌄
+</div>
+
+</div>
+
+<div class="lesson-body">
+${lesson.content}
+</div>
+
+</div>
+
+`;
+
+});
+
+bindEvents();
+markCompletedLessons();
+
+}
+
+function bindEvents(){
+
+document.querySelectorAll('.lesson-header').forEach(header=>{
+
+header.addEventListener('click',()=>{
+
+const body = header.nextElementSibling;
+const chev = header.querySelector('.chev');
+
+body.classList.toggle('open');
+chev.classList.toggle('open');
+
+});
+
+});
+
+document.querySelectorAll('.done-btn').forEach(btn=>{
+
+btn.addEventListener('click',(e)=>{
+
+e.stopPropagation();
+
+openQuiz(Number(btn.dataset.lesson));
+
+});
+
+});
+
+}
+
+renderLessons();
+
+document.querySelectorAll('.track-tab').forEach(tab=>{
+
+tab.addEventListener('click',()=>{
+
+document.querySelectorAll('.track-tab')
+.forEach(t=>t.classList.remove('active'));
+
+tab.classList.add('active');
+
+renderLessons(tab.dataset.f);
+
+});
+
+});
+
+quizClose.addEventListener('click',()=>{
+  quizModal.classList.remove('show');
+});
+
+quizModal.addEventListener('click',(e)=>{
+
+  if(e.target === quizModal){
+    quizModal.classList.remove('show');
+  }
+
+});
+
+</script>
+
+</body>
+</html>
